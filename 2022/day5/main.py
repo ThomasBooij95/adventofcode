@@ -44,7 +44,7 @@ def get_instructions(input: str):
     instructions = input.split("\n\n")[1]
     parsed_instructions = []
     for instruction in instructions.splitlines():
-        cur_moves = re.findall('\d+', instruction)
+        cur_moves = re.findall('\d+', instruction)  # type: ignore
         cur_move_dict = {
             'amount': int(cur_moves[0]),
             'from_pile': int(cur_moves[1]),
