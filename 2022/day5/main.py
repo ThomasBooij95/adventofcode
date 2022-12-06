@@ -3,8 +3,13 @@ import os
 import re
 
 
-def process_input(input: str):
-    stacks = process_stacks(get_stacks(input), get_instructions(input))
+def process_input_part_1(input: str):
+    stacks = process_stacks_part_1(get_stacks(input), get_instructions(input))
+    return get_top_stacks(stacks)
+
+
+def process_input_part_2(input: str):
+    stacks = process_stacks_part_2(get_stacks(input), get_instructions(input))
     return get_top_stacks(stacks)
 
 
@@ -12,13 +17,26 @@ def get_top_stacks(stacks):
     return ''.join([x.pop() for x in stacks])
 
 
-def process_stacks(stacks: 'list[list]', instructions: 'list[dict]'):
+def process_stacks_part_1(stacks: 'list[list]', instructions: 'list[dict]'):
     for instruction in instructions:
         index_from_pile = instruction['from_pile'] - 1
         index_to_pile = instruction['to_pile'] - 1
         for _ in range(instruction['amount']):
             crane = stacks[index_from_pile].pop()
             stacks[index_to_pile].append(crane)
+    return stacks
+
+
+def process_stacks_part_2(stacks: 'list[list]', instructions: 'list[dict]'):
+    for instruction in instructions:
+        index_from_pile = instruction['from_pile'] - 1
+        index_to_pile = instruction['to_pile'] - 1
+        amount_to_move = instruction['amount']
+        crane = []
+        for _ in range(instruction['amount']):
+            crane.append(stacks[index_from_pile].pop())
+        crane = list(reversed(crane))
+        stacks[index_to_pile] = stacks[index_to_pile]+crane
     return stacks
 
 
@@ -61,6 +79,5 @@ def get_stacks(input: str):
 if __name__ == '__main__':
     os.system('clear')
     text = import_text_file(isDemoSet=False)
-    output = process_input(text)
-    print(output)
-    input()
+    print('part 1 = ', process_input_part_1(text))
+    print('part 2 = ', process_input_part_2(text))
