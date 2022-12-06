@@ -7,10 +7,10 @@ Start of packet part 2: 14 characters all different.
 '''
 
 
-def process_input(input: str, marker_length):
+def find_first_marker_position(inputstring: str, marker_length: int):
     i = 1
     cur_marker = ''
-    for char in input:
+    for char in inputstring:
         if char not in cur_marker and len(cur_marker) >= marker_length-1:
             cur_marker += char
             return i
@@ -22,7 +22,8 @@ def process_input(input: str, marker_length):
 
 
 if __name__ == '__main__':
-    input = import_text_file(isDemoSet=False)
-    output = process_input(input, 14)
-    print('part 1: ', process_input(input, 4))
-    print('part 2: ', process_input(input, 14))
+    inputstring = import_text_file(isDemoSet=False)
+    print('Answer to part 1: ', find_first_marker_position(
+        inputstring=inputstring, marker_length=4))
+    print('Answer to part 2: ', find_first_marker_position(
+        inputstring=inputstring, marker_length=14))

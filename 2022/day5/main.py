@@ -3,12 +3,12 @@ import os
 import re
 
 
-def process_input_part_1(input: str):
+def get_top_stacks_part_1(input: str):
     stacks = process_stacks_part_1(get_stacks(input), get_instructions(input))
     return get_top_stacks(stacks)
 
 
-def process_input_part_2(input: str):
+def get_top_stacks_part_2(input: str):
     stacks = process_stacks_part_2(get_stacks(input), get_instructions(input))
     return get_top_stacks(stacks)
 
@@ -63,7 +63,6 @@ def get_stacks(input: str):
     for item in input.splitlines():
         if pattern.search(item):  # Break when containers end.
             break
-        print(item)
         item_list = list(item)
         cursor = 1
         i = 0
@@ -77,7 +76,6 @@ def get_stacks(input: str):
 
 
 if __name__ == '__main__':
-    os.system('clear')
     text = import_text_file(isDemoSet=False)
-    print('part 1 = ', process_input_part_1(text))
-    print('part 2 = ', process_input_part_2(text))
+    print('Answer to part 1: ', get_top_stacks_part_1(text))
+    print('Answer to part 2: ', get_top_stacks_part_2(text))

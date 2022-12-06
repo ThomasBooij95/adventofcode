@@ -39,7 +39,7 @@ def get_number_of_overlapping(input: 'list'):
 if __name__ == '__main__':
     input = import_text_file(isDemoSet=False)
     parsed_intervals = parse_intervals(input)
-    print('part 1: ', get_number_of_fully_contains(
+    print('Answer to part 1: ', get_number_of_fully_contains(
         parsed_intervals))
-    print('part 2: ', get_number_of_overlapping(
+    print('Answer to part 2: ', get_number_of_overlapping(
         parsed_intervals))

@@ -59,7 +59,7 @@ class Throw_codes(Enum):
     scissor = 'Z'
 
 
-def process_input_part1(input: str):
+def calculate_total_score_part1(input: str):
     total_score = 0
     for item in input.splitlines():
         opponent = item[0]
@@ -69,7 +69,7 @@ def process_input_part1(input: str):
     return total_score
 
 
-def process_input_part2(input: str):
+def calculate_total_score_part2(input: str):
     '''
     New definitions:
     X: lose the round
@@ -108,6 +108,6 @@ def calculate_shape_points(player):
 
 
 if __name__ == '__main__':
-    input = import_text_file(isDemoSet=True)
-    print(process_input_part1(input))
-    print(process_input_part2(input))
+    input = import_text_file(isDemoSet=False)
+    print('Answer to part 1: ', calculate_total_score_part1(input))
+    print('Answer to part 2: ', calculate_total_score_part2(input))

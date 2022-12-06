@@ -1,17 +1,5 @@
 from typing import List
-from helpers.import_text_file import import_text_file
-import os
-from pathlib import Path
-
-
-def import_text_file(cwd) -> str:
-    if os.environ['DEMO_SET'] == True:
-        file = str(cwd)+'/demo-input.txt'
-    else:
-        file = str(cwd)+'/test-input.txt'
-    p = Path(__file__).with_name(file)
-    with p.open('r') as f:
-        return f.read()
+from import_text_file import import_text_file
 
 
 def calculate_list_of_sums(input: str) -> List[int]:
@@ -27,9 +15,19 @@ def calculate_list_of_sums(input: str) -> List[int]:
     return sum_list
 
 
-if __name__ == '__main__':
-    input = import_text_file(os.getcwd()+'/2022/day1')
-    list_of_sums = calculate_list_of_sums(input)
+def find_highest_value(list_of_sums):
     list_of_sums.sort(reverse=True)
-    print('answer to part 1: ', list_of_sums[0])
-    print('Answer to part 2: ', sum(list_of_sums[0:3]))
+    return list_of_sums[0]
+
+
+def find_sum_of_highest_x_values(list_of_sums, x) -> int:
+    list_of_sums.sort(reverse=True)
+    return sum(list_of_sums[0:x])
+
+
+if __name__ == '__main__':
+    input = import_text_file(isDemoSet=False)
+    list_of_sums = calculate_list_of_sums(input)
+
+    print('Answer to part 1: ', find_highest_value(list_of_sums))
+    print('Answer to part 2: ', find_sum_of_highest_x_values(list_of_sums, 3))

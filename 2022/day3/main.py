@@ -51,9 +51,7 @@ def get_badges(input: str):
 
 
 if __name__ == '__main__':
-    print('')
     input = import_text_file(isDemoSet=False)
-
-    print('part 1: ', get_total_priority_score(
+    print('Answer to part 1: ', get_total_priority_score(
         get_duplicates_in_halves(input)))
-    print('part 2: ', get_total_priority_score(get_badges(input)))
+    print('Answer to part 2: ', get_total_priority_score(get_badges(input)))
