@@ -41,16 +41,61 @@ class Rules(Enum):
     CZ = 'draw'
 
 
-def process_input(input: str):
+class Strategy(Enum):
+    AX = 'scissor'
+    AY = 'rock'
+    AZ = 'paper'
+    BX = 'rock'
+    BY = 'paper'
+    BZ = 'scissor'
+    CX = 'paper'
+    CY = 'scissor'
+    CZ = 'rock'
+
+
+class Throw_codes(Enum):
+    rock = 'X'
+    paper = 'Y'
+    scissor = 'Z'
+
+
+def process_input_part1(input: str):
     total_score = 0
     for item in input.splitlines():
         opponent = item[0]
         player = item[2]
-        shape_points = calculate_shape_points(player)
-        outcome_points = calculate_outcome_points(opponent, player)
-        round_points = shape_points + outcome_points
+        round_points = calculate_round_score(opponent, player)
         total_score += round_points
     return total_score
+
+
+def process_input_part2(input: str):
+    '''
+    New definitions:
+    X: lose the round
+    Y: draw the round
+    Z: Win the round
+    '''
+    total_score = 0
+    for item in input.splitlines():
+        opponent = item[0]
+        desired_result = item[2]
+        player = choose_throw(opponent, desired_result)
+        round_points = calculate_round_score(opponent, player)
+        total_score += round_points
+    return total_score
+
+
+def choose_throw(opponent, desired_result):
+    throw = Strategy[opponent+desired_result].value
+    return Throw_codes[throw].value
+
+
+def calculate_round_score(opponent, player):
+    shape_points = calculate_shape_points(player)
+    outcome_points = calculate_outcome_points(opponent, player)
+    round_points = shape_points + outcome_points
+    return round_points
 
 
 def calculate_outcome_points(opponent, player):
@@ -63,5 +108,6 @@ def calculate_shape_points(player):
 
 
 if __name__ == '__main__':
-    input = import_text_file(isDemoSet=False)
-    print(process_input(input))
+    input = import_text_file(isDemoSet=True)
+    print(process_input_part1(input))
+    print(process_input_part2(input))
