@@ -40,7 +40,7 @@ if __name__ == '__main__':
     for k, v in SZ.items():
         if v <= MAX_SIZE:
             ans_part1 += v
-    print('answer part 1:', ans_part1)
+    print('Answer to part 1: ', ans_part1)
 
     # Part 2: Determine size of smallest directory that can be deleted to free up enough space for the update.
     total_disksize = 70000000
@@ -55,4 +55,4 @@ if __name__ == '__main__':
         if space_to_free < item:
             ans_part2 = item
             break
-    print('answer to part 2:', ans_part2)
+    print('Answer to part 2: ', ans_part2)

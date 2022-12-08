@@ -167,7 +167,7 @@ def calculate_size_of(tree):
                 # last_value = v
         print('wait here')
         if d != {}:
-            if not isinstance(v, dict):
+            if not isinstance(v, dict):  # type:ignore
                 nonlocal list_of_sums
                 list_of_sums.append(totalsum)
                 totalsum = 0
