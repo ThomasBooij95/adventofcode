@@ -1,6 +1,8 @@
 # db.sqlite3
 # scripts/
 .vscode/
+online-solution.py
+recursion_practice.py
 # .env
 # staticfiles/
 # # vendor/
