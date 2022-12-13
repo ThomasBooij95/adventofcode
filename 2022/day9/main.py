@@ -43,13 +43,14 @@ def generate_tail_move(head_x: int, head_y: int, tail_x: int, tail_y: int, direc
     if abs(head_x - tail_x) < 2 and abs(head_y - tail_y) < 2:
         return [0, 0]
 
-    # if moving to the left, right, down, or up, tail moves in same direction
+    # if moving down, or up, tail moves in same direction
     elif (head_y == tail_y and abs(head_x - tail_x) > 1):
         if head_x - tail_x < 0:
             return [-1, 0]
         else:
             return [1, 0]
 
+    # if moving left or right, tail moves in same direction
     elif (head_x == tail_x and abs(head_y - tail_y) > 1):
         if head_y - tail_y < 0:
             return [0, -1]
@@ -62,8 +63,7 @@ def generate_tail_move(head_x: int, head_y: int, tail_x: int, tail_y: int, direc
         return [int(dir_x/abs(dir_x)), int(dir_y/abs(dir_y))]
 
 
-def calculate_number_of_visited_cells_of_tail(input: str, head: Node, tail: Node):
-    # head.storestate()
+def calculate_number_of_visited_cells_of_tail(input: str, head: Node, tail: Node) -> int:
     tail.storestate()
     for item in input.splitlines():
         direction, amount = to_direction(item)
@@ -72,8 +72,6 @@ def calculate_number_of_visited_cells_of_tail(input: str, head: Node, tail: Node
             tail.move(generate_tail_move(
                 head.x, head.y, tail.x, tail.y, direction))
             tail.storestate()
-            # print('heads position:', head.x, head.y)
-            # print('tails position:', tail.x, tail.y)
     unique_data = [list(x) for x in set(tuple(x) for x in tail.history)]
     return (len(unique_data))
 
@@ -121,33 +119,24 @@ def print_current_grid(nodes: 'list[Node]'):
     for _ in range(height_grid):
         grid.append(row_of_dots)
     grid = np.array(grid, np.string_)
-    # print(grid.astype(str))
     nodes.reverse()
     for node in nodes:
-        # print(node)
         index_x, index_y = convert_to_grid_index_large_example(
             node.x, node.y, height_grid)
         grid[index_y, index_x] = node.label+' '  # type: ignore
-    # grid[0, 0] = 'test'
-    # grid[0, 1] = 'x?'
-    # grid[4, 0] = 'y?'
     for row in grid:
         print(''.join(row.astype(str)))
     print('')
     print('-'*50)
     print('')
-    # print(grid.astype(str))
 
 
 def convert_to_grid_index(xx, yy, height_grid):
-    # 0,0 ->0,4
-
     yy = height_grid-1-yy
     return xx, yy
 
 
 def convert_to_grid_index_large_example(xx, yy, height_grid):
-    # 0,0 ->0,4
     yy += 5
     xx += 11
     yy = height_grid-1-yy
