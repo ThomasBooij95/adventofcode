@@ -1,7 +1,6 @@
 from import_text_file import import_text_file
 import ast
 import logging
-from copy import deepcopy
 
 
 def process_input(input: str):
